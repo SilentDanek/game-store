@@ -1,14 +1,19 @@
 'use server'
 import Image from 'next/image'
 import Link from 'next/link'
-import {Box, Card, CardActions, CardContent, CardMedia, Rating, Typography,} from "@mui/material";
-import {DescriptionOverlay, HoverContainer} from "@/app/components/GameCard/GameCard.styles";
+import {Box, CardContent, CardMedia, Rating, Typography,} from "@mui/material";
+import {
+    DescriptionOverlay,
+    GameCardActions,
+    GameCardStyled,
+    HoverContainer
+} from "@/app/components/GameCard/GameCard.styles";
 import {PriceDisplay} from "@/app/components/GameCard/PriceDisplay/PriceDisplay";
 
 function GameCard({cardMedia, cardTitle, cardDescription, price, rating, discount}: GameCardProps) {
     const segment = cardTitle.toLowerCase().replace(/ /g, '-');
 
-    return <Card sx={{ flex: '1 1 300px', maxWidth: '100%'}}>
+    return <GameCardStyled>
         <Link href={`/game/${segment}`}>
             <HoverContainer>
                 <DescriptionOverlay>
@@ -26,13 +31,14 @@ function GameCard({cardMedia, cardTitle, cardDescription, price, rating, discoun
                 <Typography variant="h6">
                     {cardTitle}
                 </Typography>
+                <Rating value={rating} precision={0.1} readOnly/>
             </CardContent>
         </Link>
-        <CardActions sx={{justifyContent: 'space-between', alignItems: 'flex-start', padding: 2, paddingTop: 0}}>
-            <Rating value={rating} precision={0.1} readOnly/>
+
+        <GameCardActions>
             <PriceDisplay price={price} discount={discount}/>
-        </CardActions>
-    </Card>
+        </GameCardActions>
+    </GameCardStyled>
 }
 
 type GameCardProps = {

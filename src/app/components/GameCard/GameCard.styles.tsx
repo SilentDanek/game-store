@@ -1,6 +1,6 @@
 'use client';
 import {styled} from "@mui/system";
-import {Box} from "@mui/material";
+import {Box, Card, CardActions} from "@mui/material";
 
 export const HoverContainer =  styled(Box)(() => ({
     position: 'relative',
@@ -23,4 +23,19 @@ export const DescriptionOverlay = styled(Box)(() => ({
     transition: '1s opacity',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     zIndex: 2
+}));
+
+export const GameCardStyled = styled(Card)(() => ({
+    flex: '1 1 300px',
+    maxWidth: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+}));
+
+export const GameCardActions = styled(CardActions)(() => ({
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    padding: 16,
+    paddingTop: 0
 }));
