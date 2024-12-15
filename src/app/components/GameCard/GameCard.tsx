@@ -1,39 +1,49 @@
-'use server'
 import Image from 'next/image'
 import Link from 'next/link'
 import {Box, CardContent, CardMedia, Rating, Typography,} from "@mui/material";
 import {
     DescriptionOverlay,
-    GameCardActions,
+    GameCardActions, GameCardContent,
     GameCardStyled,
     HoverContainer
 } from "@/app/components/GameCard/GameCard.styles";
 import {PriceDisplay} from "@/app/components/GameCard/PriceDisplay/PriceDisplay";
+import {Genres} from "@/app/components/GameCard/Genres/Genres";
 
-function GameCard({cardMedia, cardTitle, cardDescription, price, rating, discount}: GameCardProps) {
+export function GameCard({cardMedia, cardTitle, cardDescription, price, rating, tags, discount}: GameCardProps) {
     const segment = cardTitle.toLowerCase().replace(/ /g, '-');
 
-    return <GameCardStyled>
-        <Link href={`/game/${segment}`}>
-            <HoverContainer>
+    return <GameCardStyled component="article">
+        <HoverContainer component="header">
+            <Link href={`/game/${segment}`}>
                 <DescriptionOverlay>
-                    <Box m={5}>{cardDescription}</Box>
+                    <Typography
+                        sx={{
+                            display: '-webkit-box',
+                            WebkitLineClamp: 4,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                        }}
+                    >
+                        {cardDescription}
+                    </Typography>
                 </DescriptionOverlay>
-                <CardMedia>
-                    <Image src={cardMedia} alt={cardTitle} width={400} height={200} layout={"responsive"}/>
-                </CardMedia>
-            </HoverContainer>
-            <CardContent sx={{
-                '&:last-child': {
-                    paddingBottom: 0
-                }
-            }}>
+
+
+                <Image src={cardMedia} alt={cardTitle} width={400} height={200} layout={"responsive"}/>
+            </Link>
+        </HoverContainer>
+
+        <GameCardContent component={'main'}>
+            <Link href={`/game/${segment}`}>
                 <Typography variant="h6">
                     {cardTitle}
                 </Typography>
-                <Rating value={rating} precision={0.1} readOnly/>
-            </CardContent>
-        </Link>
+            </Link>
+
+            <Rating value={rating} precision={0.1} readOnly/>
+            <Genres tags={tags}/>
+        </GameCardContent>
 
         <GameCardActions>
             <PriceDisplay price={price} discount={discount}/>
@@ -47,10 +57,9 @@ type GameCardProps = {
     cardDescription: string;
     price: number;
     rating: number;
+    tags: string[];
     discount?: {
         "discountedPrice": number;
         "percentage": number;
     } | null;
 }
-
-export default GameCard;
