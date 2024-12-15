@@ -1,7 +1,6 @@
 import {Box, Typography, Link, Grid2} from '@mui/material';
 
-
-function Footer() {
+export function Footer() {
     return (
         <Box
             component="footer"
@@ -60,4 +59,3 @@ function Footer() {
     );
 }
 
-export default Footer;

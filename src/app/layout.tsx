@@ -1,8 +1,8 @@
 import type {Metadata} from "next";
 import "./globals.scss";
 import {Roboto} from 'next/font/google';
-import Header from "@/app/components/Header/Header";
-import Footer from "@/app/components/Footer/Footer";
+import {Header} from "@/app/components/Header/Header";
+import {Footer} from "@/app/components/Footer/Footer";
 import {Container} from "@mui/material";
 
 
