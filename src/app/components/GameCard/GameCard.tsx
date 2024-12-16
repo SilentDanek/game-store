@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {Box, CardContent, CardMedia, Rating, Typography,} from "@mui/material";
+import { Rating, Typography } from "@mui/material";
 import {
     DescriptionOverlay,
     GameCardActions, GameCardContent,
@@ -15,7 +15,7 @@ export function GameCard({cardMedia, cardTitle, cardDescription, price, rating, 
 
     return <GameCardStyled component="article">
         <HoverContainer component="header">
-            <Link href={`/game/${segment}`}>
+            <Link href={`/game/${segment}`} data-testid="game-link">
                 <DescriptionOverlay>
                     <Typography
                         sx={{
@@ -28,8 +28,6 @@ export function GameCard({cardMedia, cardTitle, cardDescription, price, rating, 
                         {cardDescription}
                     </Typography>
                 </DescriptionOverlay>
-
-
                 <Image src={cardMedia} alt={cardTitle} width={400} height={200} layout={"responsive"}/>
             </Link>
         </HoverContainer>
